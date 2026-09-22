@@ -1,0 +1,110 @@
+---
+interface Review {
+	author: string;
+	title: string;
+	publication: string;
+	issue?: string;
+	date?: string;
+	url?: string;
+	pdf?: string;
+	found: boolean;
+}
+
+interface Props {
+	id: string;
+	title: string;
+	year?: number;
+	venue?: string;
+	description?: string;
+	invitation?: string;
+	language: 'he' | 'en' | 'ar';
+	pending: boolean;
+	pendingNote?: string;
+	reviews: Review[];
+}
+
+const {
+	id,
+	title,
+	year,
+	venue,
+	description,
+	invitation,
+	language,
+	pending,
+	pendingNote,
+	reviews,
+} = Astro.props;
+const dir = language === 'en' ? 'ltr' : 'rtl';
+---
+
+<li
+	class:list={[
+		'flex items-start gap-4 rounded-xl border p-4 transition-colors sm:p-5',
+		pending
+			? 'border-dashed border-stone-300 bg-transparent'
+			: 'border-stone-200 bg-white hover:border-stone-300 hover:bg-stone-100/60',
+	]}
+>
+	<span class="mt-0.5 h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-stone-100">
+		{invitation ? (
+			<img src={invitation} alt="" class="h-full w-full object-cover" loading="lazy" />
+		) : (
+			<span class="flex h-full w-full items-center justify-center text-stone-400">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.5"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="h-6 w-6"
+					aria-hidden="true"
+				>
+					<rect x="3" y="4" width="18" height="16" rx="1.5" />
+					<circle cx="8.5" cy="9.5" r="1.5" />
+					<path d="M21 16l-5.5-5.5a1.5 1.5 0 0 0-2.1 0L4 19" />
+				</svg>
+			</span>
+		)}
+	</span>
+
+	<div class="min-w-0 flex-1">
+		<div class="flex items-baseline justify-between gap-3">
+			<div class="min-w-0" dir={dir} lang={language}>
+				{pending ? (
+					<span class="font-medium leading-snug text-stone-400">{title}</span>
+				) : (
+					<a href={`/exhibitions/${id}`} class="font-medium leading-snug text-stone-900 hover:underline">
+						{title}
+					</a>
+				)}
+				{venue && <p class="mt-0.5 text-sm leading-snug text-stone-500">{venue}</p>}
+				{description && <p class="mt-1.5 text-sm leading-snug text-stone-600">{description}</p>}
+			</div>
+			{year && <span class="shrink-0 text-sm font-medium tabular-nums text-stone-700">{year}</span>}
+		</div>
+
+		{pending && pendingNote && <p class="mt-1 text-sm italic leading-snug text-stone-400">{pendingNote}</p>}
+
+		{reviews.map((review) => (
+			<p class="mt-1 text-sm leading-snug text-stone-500">
+				<span class="text-xs uppercase tracking-wide text-stone-400">Review</span>
+				&nbsp;
+				<span dir="auto">
+					{review.author}, &ldquo;{review.title}&rdquo;, {review.publication}
+					{review.issue && ` ${review.issue}`}
+					{review.date && `, ${review.date}`}
+				</span>
+				{!review.found && <span class="italic text-stone-400"> &mdash; to be located</span>}
+			</p>
+		))}
+
+		{pending && (
+			<span class="mt-1.5 inline-block text-[11px] uppercase tracking-wide text-stone-400">
+				Materials pending
+			</span>
+		)}
+	</div>
+</li>

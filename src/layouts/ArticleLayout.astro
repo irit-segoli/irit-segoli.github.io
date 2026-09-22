@@ -1,0 +1,43 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+	title: string;
+	year?: number;
+	publication?: string;
+	coAuthors: string[];
+	tags: string[];
+	language: 'he' | 'en' | 'ar';
+}
+
+const { title, year, publication, coAuthors, tags, language } = Astro.props;
+const dir = language === 'en' ? 'ltr' : 'rtl';
+---
+
+<BaseLayout title={title}>
+	<article class="mx-auto max-w-2xl px-6 py-16">
+		<a href="/articles" class="text-sm text-stone-500 transition-colors hover:text-stone-900">&larr; All articles</a>
+
+		<div dir={dir} lang={language}>
+			<h1 class="mt-6 text-3xl font-semibold tracking-tight text-stone-900">{title}</h1>
+
+			<div class="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-sm text-stone-500">
+				<span>{year}</span>
+				{publication && <span>&middot; {publication}</span>}
+				{coAuthors.length > 0 && <span>&middot; with {coAuthors.join(', ')}</span>}
+			</div>
+
+			{tags.length > 0 && (
+				<ul class="mt-4 flex flex-wrap gap-2">
+					{tags.map((tag) => (
+						<li class="rounded-full bg-stone-200 px-3 py-1 text-xs text-stone-700">{tag}</li>
+					))}
+				</ul>
+			)}
+
+			<div class="prose prose-stone mt-10 max-w-none">
+				<slot />
+			</div>
+		</div>
+	</article>
+</BaseLayout>

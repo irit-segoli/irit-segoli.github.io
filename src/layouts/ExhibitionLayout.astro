@@ -1,0 +1,62 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+	title: string;
+	year?: number;
+	venue?: string;
+	curators: string[];
+	artists: string[];
+	invitation?: string;
+	catalogPdf?: string;
+	installationImages: string[];
+}
+
+const { title, year, venue, curators, artists, invitation, catalogPdf, installationImages } =
+	Astro.props;
+---
+
+<BaseLayout title={title}>
+	<article class="mx-auto max-w-2xl px-6 py-16">
+		<a href="/exhibitions" class="text-sm text-stone-500 transition-colors hover:text-stone-900">&larr; All exhibitions</a>
+
+		<h1 class="mt-6 text-3xl font-semibold tracking-tight text-stone-900">{title}</h1>
+
+		<div class="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-sm text-stone-500">
+			<span>{year}</span>
+			{venue && <span>&middot; {venue}</span>}
+			{curators.length > 0 && <span>&middot; curated by {curators.join(', ')}</span>}
+		</div>
+
+		{artists.length > 0 && (
+			<p class="mt-2 text-sm text-stone-500">Artists: {artists.join(', ')}</p>
+		)}
+
+		{invitation && (
+			<img src={invitation} alt={`Exhibition invitation: ${title}`} class="mt-8 rounded-lg border border-stone-200" />
+		)}
+
+		<div class="prose prose-stone mt-10 max-w-none">
+			<slot />
+		</div>
+
+		{installationImages.length > 0 && (
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				{installationImages.map((src) => (
+					<img src={src} alt={`Installation view: ${title}`} class="rounded-lg border border-stone-200" />
+				))}
+			</div>
+		)}
+
+		{catalogPdf && (
+			<a
+				href={catalogPdf}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="mt-10 inline-block rounded-full bg-stone-900 px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+			>
+				Download catalog
+			</a>
+		)}
+	</article>
+</BaseLayout>

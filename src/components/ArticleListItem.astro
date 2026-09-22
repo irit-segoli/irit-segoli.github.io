@@ -1,0 +1,118 @@
+---
+interface Props {
+	id: string;
+	title: string;
+	year?: number;
+	publication?: string;
+	language: 'he' | 'en' | 'ar';
+	hasFullText: boolean;
+	pdf?: string;
+	externalUrl?: string;
+	thumbnail?: string;
+	pending: boolean;
+	pendingNote?: string;
+}
+
+const {
+	id,
+	title,
+	year,
+	publication,
+	language,
+	hasFullText,
+	pdf,
+	externalUrl,
+	thumbnail,
+	pending,
+	pendingNote,
+} = Astro.props;
+
+const href = hasFullText ? `/articles/${id}` : pdf ?? externalUrl ?? `/articles/${id}`;
+const isExternal = !hasFullText && Boolean(pdf ?? externalUrl);
+const linkLabel = hasFullText ? 'Read' : pdf ? 'PDF' : 'External link';
+const dir = language === 'en' ? 'ltr' : 'rtl';
+---
+
+<li
+	class:list={[
+		'group relative flex items-start gap-4 rounded-xl border p-4 transition-colors sm:p-5',
+		pending
+			? 'border-dashed border-stone-300 bg-transparent'
+			: 'border-stone-200 bg-white hover:border-stone-300 hover:bg-stone-100/60',
+	]}
+>
+	<span
+		class:list={[
+			'mt-0.5 h-14 w-14 shrink-0 overflow-hidden rounded-lg transition-colors',
+			thumbnail ? 'bg-stone-100' : pending ? 'bg-stone-100 text-stone-400' : 'bg-stone-100 text-stone-500 group-hover:bg-stone-900 group-hover:text-white',
+		]}
+	>
+		{thumbnail ? (
+			<img src={thumbnail} alt="" class="h-full w-full object-cover" loading="lazy" />
+		) : (
+			<span class="flex h-full w-full items-center justify-center">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.75"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="h-5 w-5"
+					aria-hidden="true"
+				>
+					{pending ? (
+						<>
+							<path d="M6 3h12M6 21h12" />
+							<path d="M7 3v3.5a5 5 0 0 0 2 4l1.5 1.5-1.5 1.5a5 5 0 0 0-2 4V21M17 3v3.5a5 5 0 0 1-2 4L13.5 12l1.5 1.5a5 5 0 0 1 2 4V21" />
+						</>
+					) : hasFullText ? (
+						<>
+							<path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
+							<path d="M8 8h8M8 12h8M8 16h5" />
+						</>
+					) : pdf ? (
+						<>
+							<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+							<path d="M14 3v5h5" />
+							<path d="M9 14h6M9 17h4" />
+						</>
+					) : (
+						<>
+							<path d="M14 4h6v6" />
+							<path d="M20 4l-9 9" />
+							<path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
+						</>
+					)}
+				</svg>
+			</span>
+		)}
+	</span>
+
+	<div class="min-w-0 flex-1" dir={dir} lang={language}>
+		{pending ? (
+			<span class="font-medium leading-snug text-stone-400">{title}</span>
+		) : (
+			<a
+				href={href}
+				target={isExternal ? '_blank' : undefined}
+				rel={isExternal ? 'noopener noreferrer' : undefined}
+				class="font-medium leading-snug text-stone-900 after:absolute after:inset-0 after:content-['']"
+			>
+				{title}
+			</a>
+		)}
+		{publication && <p class="mt-1 text-sm leading-snug text-stone-500">{publication}</p>}
+		{pending && pendingNote && (
+			<p class="mt-1 text-sm italic leading-snug text-stone-400" dir="ltr" lang="en">{pendingNote}</p>
+		)}
+	</div>
+
+	<div class="shrink-0 text-right">
+		{year && <div class="text-sm font-medium tabular-nums text-stone-700">{year}</div>}
+		<div class="mt-0.5 text-[11px] uppercase tracking-wide text-stone-400">
+			{pending ? 'Pending' : linkLabel}
+		</div>
+	</div>
+</li>

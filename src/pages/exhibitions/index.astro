@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExhibitionListItem from '../../components/ExhibitionListItem.astro';
+
+const exhibitions = (await getCollection('exhibitions', ({ data }) => !data.draft)).sort(
+	(a, b) => (b.data.year ?? 0) - (a.data.year ?? 0) || a.id.localeCompare(b.id),
+);
+---
+
+<BaseLayout title="Exhibitions">
+	<div class="mx-auto max-w-2xl px-6 py-16">
+		<h1 class="text-3xl font-semibold tracking-tight text-stone-900">Exhibitions curated by Irit Segoli</h1>
+		<p class="mt-2 text-stone-500">
+			{exhibitions.length} exhibition{exhibitions.length === 1 ? '' : 's'}
+		</p>
+
+		<ul class="mt-8 space-y-3">
+			{exhibitions.map((exhibition) => (
+				<ExhibitionListItem
+					id={exhibition.id}
+					title={exhibition.data.title}
+					year={exhibition.data.year}
+					venue={exhibition.data.venue}
+					description={exhibition.data.description}
+					invitation={exhibition.data.invitation}
+					language={exhibition.data.language}
+					pending={exhibition.data.pending}
+					pendingNote={exhibition.data.pendingNote}
+					reviews={exhibition.data.reviews}
+				/>
+			))}
+		</ul>
+	</div>
+</BaseLayout>
