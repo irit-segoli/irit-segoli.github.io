@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
+import ArticleListItem from '../components/ArticleListItem.astro';
 
 type Review = CollectionEntry<'exhibitions'>['data']['reviews'][number];
 
@@ -16,6 +17,7 @@ interface Props {
 	catalogPdfEn?: string;
 	installationImages: string[];
 	reviews: Review[];
+	relatedArticles: CollectionEntry<'articles'>[];
 }
 
 const {
@@ -30,6 +32,7 @@ const {
 	catalogPdfEn,
 	installationImages,
 	reviews,
+	relatedArticles,
 } = Astro.props;
 const dir = language === 'en' ? 'ltr' : 'rtl';
 ---
@@ -116,6 +119,29 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 							</li>
 						);
 					})}
+				</ul>
+			</section>
+		)}
+
+		{relatedArticles.length > 0 && (
+			<section class="mt-12 border-t border-stone-200 pt-8">
+				<h2 class="text-lg font-semibold tracking-tight text-stone-900">Related articles</h2>
+				<ul class="mt-4 space-y-3">
+					{relatedArticles.map((article) => (
+						<ArticleListItem
+							id={article.id}
+							title={article.data.title}
+							year={article.data.year}
+							publication={article.data.publication}
+							language={article.data.language}
+							hasFullText={article.data.hasFullText}
+							pdf={article.data.pdf}
+							externalUrl={article.data.externalUrl}
+							thumbnail={article.data.thumbnail}
+							pending={article.data.pending}
+							pendingNote={article.data.pendingNote}
+						/>
+					))}
 				</ul>
 			</section>
 		)}

@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, reference, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 const articles = defineCollection({
@@ -65,6 +65,7 @@ const exhibitions = defineCollection({
 					}),
 				)
 				.default([]),
+			relatedArticles: z.array(reference('articles')).default([]),
 			tags: z.array(z.string()).default([]),
 			pending: z.boolean().default(false),
 			pendingNote: z.string().optional(),

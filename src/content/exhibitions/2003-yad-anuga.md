@@ -8,6 +8,6 @@ curators: ["Irit Segoli"]
 artists: ["משה גרשוני"]
 tags: ["משה גרשוני", "אמנות קול"]
 pending: true
-pendingNote: "Venue and year taken from the article 'How to sing Yad Anuga' (Studio 143, 2003). Still need materials (invitation, installation photos, or curatorial text)."
+relatedArticles: ["2003-yad-anuga"]
 draft: false
 ---

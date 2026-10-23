@@ -1,15 +1,4 @@
 ---
-interface Review {
-	author: string;
-	title: string;
-	publication: string;
-	issue?: string;
-	date?: string;
-	url?: string;
-	pdf?: string;
-	found: boolean;
-}
-
 interface Props {
 	id: string;
 	title: string;
@@ -20,7 +9,7 @@ interface Props {
 	language: 'he' | 'en' | 'ar';
 	pending: boolean;
 	pendingNote?: string;
-	reviews: Review[];
+	hasPage: boolean;
 }
 
 const {
@@ -33,11 +22,9 @@ const {
 	language,
 	pending,
 	pendingNote,
-	reviews,
+	hasPage,
 } = Astro.props;
 const dir = language === 'en' ? 'ltr' : 'rtl';
-// Pending exhibitions still get a page once there is a review to show on it
-const hasPage = !pending || reviews.length > 0;
 ---
 
 <li

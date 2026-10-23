@@ -1,11 +1,12 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection, getEntries, render } from 'astro:content';
 import ExhibitionLayout from '../../layouts/ExhibitionLayout.astro';
+import { hasExhibitionPage } from '../../lib/exhibitions';
 
 export async function getStaticPaths() {
 	const exhibitions = await getCollection(
 		'exhibitions',
-		({ data }) => !data.draft && (!data.pending || data.reviews.length > 0),
+		({ data }) => !data.draft && hasExhibitionPage(data),
 	);
 	return exhibitions.map((exhibition) => ({
 		params: { id: exhibition.id },
@@ -16,6 +17,7 @@ export async function getStaticPaths() {
 const { exhibition } = Astro.props;
 const { data } = exhibition;
 const { Content } = data.hasCuratorialText ? await render(exhibition) : { Content: null };
+const relatedArticles = (await getEntries(data.relatedArticles)).filter((article) => !article.data.draft);
 ---
 
 <ExhibitionLayout
@@ -30,6 +32,7 @@ const { Content } = data.hasCuratorialText ? await render(exhibition) : { Conten
 	catalogPdfEn={data.catalogPdfEn}
 	installationImages={data.installationImages}
 	reviews={data.reviews}
+	relatedArticles={relatedArticles}
 >
 	{data.hasCuratorialText && <Content />}
 </ExhibitionLayout>
