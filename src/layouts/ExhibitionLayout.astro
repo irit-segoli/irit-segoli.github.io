@@ -53,24 +53,8 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 			<p class="mt-2 text-sm text-stone-500">Artists: {artists.join(', ')}</p>
 		)}
 
-		{invitation && (
-			<img src={invitation} alt={`Exhibition invitation: ${title}`} class="mt-8 rounded-lg border border-stone-200" />
-		)}
-
-		<div class="prose prose-stone mt-10 max-w-none">
-			<slot />
-		</div>
-
-		{installationImages.length > 0 && (
-			<div class="mt-10 grid gap-4 sm:grid-cols-2">
-				{installationImages.map((src) => (
-					<img src={src} alt={`Installation view: ${title}`} class="rounded-lg border border-stone-200" />
-				))}
-			</div>
-		)}
-
 		{(catalogPdf || catalogPdfEn) && (
-			<div class="mt-10 flex flex-wrap gap-3">
+			<div class="mt-8 flex flex-wrap gap-3">
 				{catalogPdf && (
 					<a
 						href={catalogPdf}
@@ -91,6 +75,22 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 						Download catalog (English)
 					</a>
 				)}
+			</div>
+		)}
+
+		{invitation && (
+			<img src={invitation} alt={`Exhibition invitation: ${title}`} class="mt-6 rounded-lg border border-stone-200" />
+		)}
+
+		<div class="prose prose-stone mt-10 max-w-none">
+			<slot />
+		</div>
+
+		{installationImages.length > 0 && (
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				{installationImages.map((src) => (
+					<img src={src} alt={`Installation view: ${title}`} class="rounded-lg border border-stone-200" />
+				))}
 			</div>
 		)}
 
