@@ -5,7 +5,10 @@ import ExhibitionListItem from '../../components/ExhibitionListItem.astro';
 import { hasExhibitionPage } from '../../lib/exhibitions';
 
 const exhibitions = (await getCollection('exhibitions', ({ data }) => !data.draft)).sort(
-	(a, b) => (b.data.year ?? 0) - (a.data.year ?? 0) || a.id.localeCompare(b.id),
+	(a, b) =>
+		(b.data.year ?? 0) - (a.data.year ?? 0) ||
+		(b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0) ||
+		a.id.localeCompare(b.id),
 );
 ---
 
@@ -19,6 +22,8 @@ const exhibitions = (await getCollection('exhibitions', ({ data }) => !data.draf
 					id={exhibition.id}
 					title={exhibition.data.title}
 					year={exhibition.data.year}
+					artists={exhibition.data.artists}
+					artistsLabel={exhibition.data.artistsLabel}
 					venue={exhibition.data.venue}
 					description={exhibition.data.description}
 					invitation={exhibition.data.invitation}

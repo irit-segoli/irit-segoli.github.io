@@ -3,6 +3,8 @@ interface Props {
 	id: string;
 	title: string;
 	year?: number;
+	artists: string[];
+	artistsLabel?: string;
 	venue?: string;
 	description?: string;
 	invitation?: string;
@@ -16,6 +18,8 @@ const {
 	id,
 	title,
 	year,
+	artists,
+	artistsLabel = artists.length > 1 ? 'אמנים' : 'אמן',
 	venue,
 	description,
 	invitation,
@@ -59,25 +63,26 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 	</span>
 
 	<div class="min-w-0 flex-1">
-		<div class="flex items-baseline justify-between gap-3">
-			<div class="min-w-0 flex-1" dir={dir} lang={language}>
-				{hasPage ? (
-					<a
-						href={`/exhibitions/${id}`}
-						class:list={[
-							'font-medium leading-snug after:absolute after:inset-0 after:rounded-xl hover:underline',
-							pending ? 'text-stone-500' : 'text-stone-900',
-						]}
-					>
-						{title}
-					</a>
-				) : (
-					<span class="font-medium leading-snug text-stone-400">{title}</span>
-				)}
-				{venue && <p class="mt-0.5 text-sm leading-snug text-stone-500">{venue}</p>}
-				{description && <p class="mt-1.5 text-sm leading-snug text-stone-600">{description}</p>}
-			</div>
-			{year && <span class="shrink-0 text-sm font-medium tabular-nums text-stone-700">{year}</span>}
+		<div dir={dir} lang={language}>
+			{year && <p class="text-sm font-medium tabular-nums text-stone-700">{year}</p>}
+			{hasPage ? (
+				<a
+					href={`/exhibitions/${id}`}
+					class:list={[
+						'font-medium leading-snug after:absolute after:inset-0 after:rounded-xl hover:underline',
+						pending ? 'text-stone-500' : 'text-stone-900',
+					]}
+				>
+					{title}
+				</a>
+			) : (
+				<span class="font-medium leading-snug text-stone-400">{title}</span>
+			)}
+			{artists.length > 0 && (
+				<p class="mt-0.5 text-sm leading-snug text-stone-700">{artistsLabel}: {artists.join(', ')}</p>
+			)}
+			{venue && <p class="mt-0.5 text-sm leading-snug text-stone-500">{venue}</p>}
+			{description && <p class="mt-1.5 text-sm leading-snug text-stone-600">{description}</p>}
 		</div>
 
 		{pending && pendingNote && <p class:list={['mt-1 text-sm italic leading-snug text-stone-400', dir === 'rtl' && 'text-right']} dir="ltr" lang="en">{pendingNote}</p>}

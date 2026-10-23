@@ -46,6 +46,8 @@ const exhibitions = defineCollection({
 			description: z.string().optional(),
 			curators: z.array(z.string()).default([]),
 			artists: z.array(z.string()).default([]),
+			// Label shown before the artist names; defaults to אמן (one artist) or אמנים (several)
+			artistsLabel: z.string().optional(),
 			hasCuratorialText: z.boolean().default(false),
 			invitation: z.string().optional(),
 			catalogPdf: z.string().optional(),
