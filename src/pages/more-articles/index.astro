@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleListItem from '../../components/ArticleListItem.astro';
-import PublisherNote from '../../components/PublisherNote.astro';
 
 const articles = (
 	await getCollection('articles', ({ data }) => !data.draft && data.section === 'more')
@@ -16,7 +15,6 @@ const articles = (
 <BaseLayout title="More Articles">
 	<div class="mx-auto max-w-2xl px-6 py-16">
 		<h1 class="text-3xl font-semibold tracking-tight text-stone-900">More Articles</h1>
-		<PublisherNote />
 
 		<ul class="mt-8 space-y-3">
 			{articles.map((article) => (
