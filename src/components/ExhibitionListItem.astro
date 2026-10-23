@@ -72,7 +72,7 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 
 	<div class="min-w-0 flex-1">
 		<div class="flex items-baseline justify-between gap-3">
-			<div class="min-w-0" dir={dir} lang={language}>
+			<div class="min-w-0 flex-1" dir={dir} lang={language}>
 				{pending ? (
 					<span class="font-medium leading-snug text-stone-400">{title}</span>
 				) : (
@@ -89,10 +89,10 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 			{year && <span class="shrink-0 text-sm font-medium tabular-nums text-stone-700">{year}</span>}
 		</div>
 
-		{pending && pendingNote && <p class="mt-1 text-sm italic leading-snug text-stone-400">{pendingNote}</p>}
+		{pending && pendingNote && <p class:list={['mt-1 text-sm italic leading-snug text-stone-400', dir === 'rtl' && 'text-right']} dir="ltr" lang="en">{pendingNote}</p>}
 
 		{reviews.map((review) => (
-			<p class="mt-1 text-sm leading-snug text-stone-500">
+			<p class="mt-1 text-sm leading-snug text-stone-500" dir={dir}>
 				<span class="text-xs uppercase tracking-wide text-stone-400">Review</span>
 				&nbsp;
 				<span dir="auto">
@@ -105,9 +105,9 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 		))}
 
 		{pending && (
-			<span class="mt-1.5 inline-block text-[11px] uppercase tracking-wide text-stone-400">
+			<p class="mt-1.5 text-[11px] uppercase tracking-wide text-stone-400" dir={dir}>
 				Materials pending
-			</span>
+			</p>
 		)}
 	</div>
 </li>
