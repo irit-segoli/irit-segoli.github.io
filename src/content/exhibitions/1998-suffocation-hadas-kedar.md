@@ -1,5 +1,5 @@
 ---
-title: "סיפוקיישן (Suffocation)"
+title: "הדס קידר - סיפוקיישן (Suffocation)"
 year: 1998
 language: he
 venue: "גלריה קו 16"
