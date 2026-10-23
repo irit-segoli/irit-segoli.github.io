@@ -1,11 +1,13 @@
 ---
-title: "האדום שלי הוא דמך היקר: לביא, גרשוני, ושאלת האוטונומיה של האמנות"
+title: "האדום שלי הוא דמך היקר: רפי לביא ומשה גרשוני, שאלת האוטונומיה של האמנות"
 year: 1996
-publication: "סטודיו, גיליון 76 (אוקטובר-נובמבר 1996), עמ' 36"
+publication: "סטודיו, גיליון 76 (אוקטובר-נובמבר 1996), עמ' 36–43"
 type: academic
 language: he
-externalUrl: "https://www.infocenters.co.il/yadyaari/notebook_ext.asp?item=264369&site=yadyaari&lang=HEB&menu=1"
-pending: true
-pendingNote: "Issue confirmed (Studio 76, Oct-Nov 1996) — still need the article's PDF or scan; link above is only the library catalog record for the issue."
+tags: ["רפי לביא", "משה גרשוני", "גלריה גבעון", "אמנות ישראלית"]
+hasFullText: false
+thumbnail: "/images/articles/1996-adom-sheli-hu-damcha.jpg"
+pdf: "/files/articles/1996-adom-sheli-hu-damcha.pdf"
+abstract: "טיוטת תקציר לבדיקה: בעקבות התערוכה המשותפת של רפי לביא ומשה גרשוני בגלריה גבעון (מאי 1996), שנפתחה שבעה חודשים לאחר רצח רבין, המאמר בוחן את היחסים בין שתי הקריירות, את מקומן של המילים והדימויים בציוריהם ואת שאלת האוטונומיה של האמנות מול הפוליטי."
 draft: false
 ---

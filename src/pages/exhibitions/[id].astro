@@ -23,6 +23,7 @@ const { Content } = data.hasCuratorialText ? await render(exhibition) : { Conten
 	artists={data.artists}
 	invitation={data.invitation}
 	catalogPdf={data.catalogPdf}
+	catalogPdfEn={data.catalogPdfEn}
 	installationImages={data.installationImages}
 >
 	{data.hasCuratorialText && <Content />}

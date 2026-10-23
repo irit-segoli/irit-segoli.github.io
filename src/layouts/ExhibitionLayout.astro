@@ -9,10 +9,11 @@ interface Props {
 	artists: string[];
 	invitation?: string;
 	catalogPdf?: string;
+	catalogPdfEn?: string;
 	installationImages: string[];
 }
 
-const { title, year, venue, curators, artists, invitation, catalogPdf, installationImages } =
+const { title, year, venue, curators, artists, invitation, catalogPdf, catalogPdfEn, installationImages } =
 	Astro.props;
 ---
 
@@ -48,15 +49,29 @@ const { title, year, venue, curators, artists, invitation, catalogPdf, installat
 			</div>
 		)}
 
-		{catalogPdf && (
-			<a
-				href={catalogPdf}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="mt-10 inline-block rounded-full bg-stone-900 px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
-			>
-				Download catalog
-			</a>
+		{(catalogPdf || catalogPdfEn) && (
+			<div class="mt-10 flex flex-wrap gap-3">
+				{catalogPdf && (
+					<a
+						href={catalogPdf}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-block rounded-full bg-stone-900 px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+					>
+						{catalogPdfEn ? 'Download catalog (Hebrew)' : 'Download catalog'}
+					</a>
+				)}
+				{catalogPdfEn && (
+					<a
+						href={catalogPdfEn}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-block rounded-full bg-stone-900 px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+					>
+						Download catalog (English)
+					</a>
+				)}
+			</div>
 		)}
 	</article>
 </BaseLayout>
