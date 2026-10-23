@@ -16,6 +16,7 @@ const articles = defineCollection({
 			coAuthors: z.array(z.string()).default([]),
 			abstract: z.string().optional(),
 			tags: z.array(z.string()).default([]),
+			section: z.enum(['general', 'justice', 'more']).default('general'),
 			hasFullText: z.boolean().default(false),
 			pdf: z.string().optional(),
 			externalUrl: z.url().optional(),
@@ -48,6 +49,7 @@ const exhibitions = defineCollection({
 			hasCuratorialText: z.boolean().default(false),
 			invitation: z.string().optional(),
 			catalogPdf: z.string().optional(),
+			catalogPdfEn: z.string().optional(),
 			installationImages: z.array(z.string()).default([]),
 			reviews: z
 				.array(

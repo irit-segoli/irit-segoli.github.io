@@ -5,6 +5,7 @@ publication: "סטודיו, גיליון 30, עמ' 12"
 type: op-ed
 language: he
 tags: ["ישראל הירשברג", "ציור ישראלי"]
+section: more
 hasFullText: false
 thumbnail: "/images/articles/1992-lirot-tziyur.jpg"
 pdf: "/files/articles/1992-lirot-tziyur.pdf"

@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleListItem from '../../components/ArticleListItem.astro';
+import PublisherNote from '../../components/PublisherNote.astro';
+
+const articles = (
+	await getCollection('articles', ({ data }) => !data.draft && data.section === 'justice')
+).sort(
+	(a, b) => (b.data.year ?? 0) - (a.data.year ?? 0) ||
+		(a.data.order ?? 100) - (b.data.order ?? 100) ||
+		a.id.localeCompare(b.id),
+);
+---
+
+<BaseLayout title="عدالة / צדק">
+	<div class="mx-auto max-w-2xl px-6 py-16">
+		<h1 class="text-3xl font-semibold tracking-tight text-stone-900" dir="rtl">عدالة / צדק"</h1>
+		<p class="mt-2 text-stone-500">{articles.length} article{articles.length === 1 ? '' : 's'}</p>
+		<PublisherNote />
+
+		<ul class="mt-8 space-y-3">
+			{articles.map((article) => (
+				<ArticleListItem
+					id={article.id}
+					title={article.data.title}
+					year={article.data.year}
+					publication={article.data.publication}
+					language={article.data.language}
+					hasFullText={article.data.hasFullText}
+					pdf={article.data.pdf}
+					externalUrl={article.data.externalUrl}
+					thumbnail={article.data.thumbnail}
+					pending={article.data.pending}
+					pendingNote={article.data.pendingNote}
+				/>
+			))}
+		</ul>
+	</div>
+</BaseLayout>

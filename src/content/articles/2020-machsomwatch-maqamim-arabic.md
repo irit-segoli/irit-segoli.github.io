@@ -6,6 +6,7 @@ type: other
 language: ar
 coAuthors: ["נורית יובר (Nurit Yover)"]
 tags: ["מקאמים", "מורשת דתית פלסטינית", "מחסום ווטש"]
+section: justice
 hasFullText: false
 thumbnail: "/images/articles/2020-machsomwatch-maqamim-arabic.jpg"
 pdf: "/files/articles/2020-machsomwatch-maqamim-arabic.pdf"

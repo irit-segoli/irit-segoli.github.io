@@ -3,6 +3,8 @@ const navLinks = [
 	{ href: '/', label: 'Home' },
 	{ href: '/articles', label: 'Articles' },
 	{ href: '/exhibitions', label: 'Exhibitions' },
+	{ href: '/justice', label: 'צדק / عدالة', dir: 'rtl' },
+	{ href: '/more-articles', label: 'More Articles' },
 ];
 ---
 
@@ -12,7 +14,7 @@ const navLinks = [
 		<ul class="flex gap-6 text-sm text-stone-600">
 			{navLinks.map((link) => (
 				<li>
-					<a href={link.href} class="transition-colors hover:text-stone-900">{link.label}</a>
+					<a href={link.href} dir={link.dir} class="transition-colors hover:text-stone-900">{link.label}</a>
 				</li>
 			))}
 		</ul>

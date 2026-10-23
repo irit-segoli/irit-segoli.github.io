@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ShareForm from '../components/ShareForm.astro';
 ---
 
 <BaseLayout title="Home">
@@ -9,23 +10,46 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 		<div class="prose prose-stone mt-8 max-w-none">
 			<p>
-				This site gathers and preserves the academic writing, curatorial texts, exhibitions,
-				and related projects of Irit Segoli — an art researcher, curator, and activist whose
-				work has engaged with questions of justice throughout her career.
-			</p>
-			<p>
-				<!-- Placeholder: replace with a full biography covering her academic path, curatorial
-				practice, and activism. -->
-				A fuller biography, covering her academic path, curatorial practice, and activism, will
-				go here.
+				This site gathers and preserves the works, writings, exhibitions, and related projects of Irit Segoli — an art researcher, curator, 
+				and activist for justice, at least in the land between the river and the sea.			
 			</p>
 		</div>
 
-		<a
-			href="/articles"
-			class="mt-10 inline-block rounded-full bg-stone-900 px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
-		>
-			Browse articles
-		</a>
+		<div class="mt-10 flex flex-wrap gap-3">
+			<a
+				href="/articles"
+				class="inline-block rounded-full bg-stone-900 px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+			>
+				Articles
+			</a>
+			<a
+				href="/exhibitions"
+				class="inline-block rounded-full border border-stone-300 px-5 py-2.5 text-sm font-medium text-stone-900 transition-colors hover:border-stone-500"
+			>
+				Exhibitions
+			</a>
+			<a
+				href="/justice"
+				dir="rtl"
+				class="inline-block rounded-full border border-stone-300 px-5 py-2.5 text-sm font-medium text-stone-900 transition-colors hover:border-stone-500"
+			>
+				عدالة / צדק
+			</a>
+		</div>
+
+		<details id="share" class="scroll-mt-24 mt-10">
+			<summary class="cursor-pointer text-sm font-medium text-stone-700 hover:text-stone-900">
+				Click here to contribute materials
+			</summary>
+
+			<p class="prose prose-stone mt-4 max-w-none">
+				If you have materials — writing, photos, invitations, catalogs, or anything else
+				related to Irit's work — please share them below.
+			</p>
+
+			<div class="mt-4">
+				<ShareForm />
+			</div>
+		</details>
 	</div>
 </BaseLayout>
