@@ -12,9 +12,6 @@ const exhibitions = (await getCollection('exhibitions', ({ data }) => !data.draf
 <BaseLayout title="Exhibitions">
 	<div class="mx-auto max-w-2xl px-6 py-16">
 		<h1 class="text-3xl font-semibold tracking-tight text-stone-900">Exhibitions curated by Irit Segoli</h1>
-		<p class="mt-2 text-stone-500">
-			{exhibitions.length} exhibition{exhibitions.length === 1 ? '' : 's'}
-		</p>
 		<PublisherNote />
 
 		<ul class="mt-8 space-y-3">
