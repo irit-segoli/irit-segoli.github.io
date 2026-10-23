@@ -2,7 +2,7 @@
 title: "דרך לוד"
 year: 2003
 language: he
-curators: ["אירית סגולי"]
+curators: ["Irit Segoli"]
 reviews:
   - author: "אסתר דותן"
     title: "דרך לוד"
