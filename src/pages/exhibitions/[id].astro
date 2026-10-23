@@ -3,7 +3,10 @@ import { getCollection, render } from 'astro:content';
 import ExhibitionLayout from '../../layouts/ExhibitionLayout.astro';
 
 export async function getStaticPaths() {
-	const exhibitions = await getCollection('exhibitions', ({ data }) => !data.draft && !data.pending);
+	const exhibitions = await getCollection(
+		'exhibitions',
+		({ data }) => !data.draft && (!data.pending || data.reviews.length > 0),
+	);
 	return exhibitions.map((exhibition) => ({
 		params: { id: exhibition.id },
 		props: { exhibition },
@@ -18,6 +21,7 @@ const { Content } = data.hasCuratorialText ? await render(exhibition) : { Conten
 <ExhibitionLayout
 	title={data.title}
 	year={data.year}
+	language={data.language}
 	venue={data.venue}
 	curators={data.curators}
 	artists={data.artists}
@@ -25,6 +29,7 @@ const { Content } = data.hasCuratorialText ? await render(exhibition) : { Conten
 	catalogPdf={data.catalogPdf}
 	catalogPdfEn={data.catalogPdfEn}
 	installationImages={data.installationImages}
+	reviews={data.reviews}
 >
 	{data.hasCuratorialText && <Content />}
 </ExhibitionLayout>

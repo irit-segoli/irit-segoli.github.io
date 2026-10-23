@@ -1,9 +1,13 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
+
+type Review = CollectionEntry<'exhibitions'>['data']['reviews'][number];
 
 interface Props {
 	title: string;
 	year?: number;
+	language: 'he' | 'en' | 'ar';
 	venue?: string;
 	curators: string[];
 	artists: string[];
@@ -11,10 +15,23 @@ interface Props {
 	catalogPdf?: string;
 	catalogPdfEn?: string;
 	installationImages: string[];
+	reviews: Review[];
 }
 
-const { title, year, venue, curators, artists, invitation, catalogPdf, catalogPdfEn, installationImages } =
-	Astro.props;
+const {
+	title,
+	year,
+	language,
+	venue,
+	curators,
+	artists,
+	invitation,
+	catalogPdf,
+	catalogPdfEn,
+	installationImages,
+	reviews,
+} = Astro.props;
+const dir = language === 'en' ? 'ltr' : 'rtl';
 ---
 
 <BaseLayout title={title}>
@@ -72,6 +89,35 @@ const { title, year, venue, curators, artists, invitation, catalogPdf, catalogPd
 					</a>
 				)}
 			</div>
+		)}
+
+		{reviews.length > 0 && (
+			<section class="mt-12 border-t border-stone-200 pt-8">
+				<h2 class="text-lg font-semibold tracking-tight text-stone-900">Reviews</h2>
+				<ul class="mt-4 space-y-4">
+					{reviews.map((review) => {
+						const link = review.pdf ?? review.url;
+						return (
+							<li class="text-sm leading-relaxed">
+								<p class="text-stone-700" dir={dir} lang={language}>
+									{review.author},{' '}
+									{link ? (
+										<a href={link} target="_blank" rel="noopener noreferrer" class="underline hover:text-stone-900">
+											&quot;{review.title}&quot;
+										</a>
+									) : (
+										<>&quot;{review.title}&quot;</>
+									)}
+									, {review.publication}
+									{review.issue && `, ${review.issue}`}
+									{review.date && `, ${review.date}`}
+								</p>
+								{!review.found && <p class="mt-0.5 text-xs italic text-stone-400">Copy not yet located</p>}
+							</li>
+						);
+					})}
+				</ul>
+			</section>
 		)}
 	</article>
 </BaseLayout>

@@ -36,14 +36,15 @@ const {
 	reviews,
 } = Astro.props;
 const dir = language === 'en' ? 'ltr' : 'rtl';
+// Pending exhibitions still get a page once there is a review to show on it
+const hasPage = !pending || reviews.length > 0;
 ---
 
 <li
 	class:list={[
 		'relative flex items-start gap-4 rounded-xl border p-4 transition-colors sm:p-5',
-		pending
-			? 'border-dashed border-stone-300 bg-transparent'
-			: 'cursor-pointer border-stone-200 bg-white hover:border-stone-300 hover:bg-stone-100/60',
+		pending ? 'border-dashed border-stone-300 bg-transparent' : 'border-stone-200 bg-white',
+		hasPage && 'cursor-pointer hover:border-stone-300 hover:bg-stone-100/60',
 	]}
 >
 	<span class="mt-0.5 h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-stone-100">
@@ -73,15 +74,18 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 	<div class="min-w-0 flex-1">
 		<div class="flex items-baseline justify-between gap-3">
 			<div class="min-w-0 flex-1" dir={dir} lang={language}>
-				{pending ? (
-					<span class="font-medium leading-snug text-stone-400">{title}</span>
-				) : (
+				{hasPage ? (
 					<a
 						href={`/exhibitions/${id}`}
-						class="font-medium leading-snug text-stone-900 after:absolute after:inset-0 after:rounded-xl hover:underline"
+						class:list={[
+							'font-medium leading-snug after:absolute after:inset-0 after:rounded-xl hover:underline',
+							pending ? 'text-stone-500' : 'text-stone-900',
+						]}
 					>
 						{title}
 					</a>
+				) : (
+					<span class="font-medium leading-snug text-stone-400">{title}</span>
 				)}
 				{venue && <p class="mt-0.5 text-sm leading-snug text-stone-500">{venue}</p>}
 				{description && <p class="mt-1.5 text-sm leading-snug text-stone-600">{description}</p>}
@@ -90,19 +94,6 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 		</div>
 
 		{pending && pendingNote && <p class:list={['mt-1 text-sm italic leading-snug text-stone-400', dir === 'rtl' && 'text-right']} dir="ltr" lang="en">{pendingNote}</p>}
-
-		{reviews.map((review) => (
-			<p class="mt-1 text-sm leading-snug text-stone-500" dir={dir}>
-				<span class="text-xs uppercase tracking-wide text-stone-400">Review</span>
-				&nbsp;
-				<span dir="auto">
-					{review.author}, &ldquo;{review.title}&rdquo;, {review.publication}
-					{review.issue && ` ${review.issue}`}
-					{review.date && `, ${review.date}`}
-				</span>
-				{!review.found && <span class="italic text-stone-400"> &mdash; to be located</span>}
-			</p>
-		))}
 
 		{pending && (
 			<p class="mt-1.5 text-[11px] uppercase tracking-wide text-stone-400" dir={dir}>
