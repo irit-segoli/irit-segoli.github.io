@@ -8,7 +8,26 @@ interface Props {
 	description?: string;
 }
 
-const { title, description = 'Digital archive of the work of Irit Segoli.' } = Astro.props;
+const {
+	title,
+	description = 'אירית סגולי (Irit Segoli): art researcher, curator, and justice activist. Archive of her articles, catalog essays, and exhibitions. ארכיון המאמרים והתערוכות של אירית סגולי.',
+} = Astro.props;
+
+const siteName = 'Irit Segoli | אירית סגולי';
+const pageTitle = title === 'Home' ? siteName : `${title} · ${siteName}`;
+// build.format 'file' puts .html in the pathname; canonical URLs use the clean form the site links to
+const canonical = new URL(Astro.url.pathname.replace(/(index)?\.html$/, ''), Astro.site);
+
+// Tells search engines the site is about this person, under both spellings of her name
+const personSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: 'Irit Segoli',
+	alternateName: ['אירית סגולי', 'Irit Segoly'],
+	description: 'Art researcher, curator, and justice activist',
+	jobTitle: ['Art researcher', 'Curator'],
+	url: Astro.site?.href,
+};
 ---
 
 <html lang="en" dir="ltr">
@@ -17,8 +36,19 @@ const { title, description = 'Digital archive of the work of Irit Segoli.' } = A
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={description} />
+		<meta name="author" content="Irit Segoli (אירית סגולי)" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title} · Irit Segoli</title>
+		<link rel="canonical" href={canonical} />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={siteName} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:locale:alternate" content="he_IL" />
+		<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+		<title>{pageTitle}</title>
 	</head>
 	<body class="flex min-h-screen flex-col bg-stone-50 text-stone-900">
 		<Header />
