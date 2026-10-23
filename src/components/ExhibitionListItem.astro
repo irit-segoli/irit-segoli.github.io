@@ -40,10 +40,10 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 
 <li
 	class:list={[
-		'flex items-start gap-4 rounded-xl border p-4 transition-colors sm:p-5',
+		'relative flex items-start gap-4 rounded-xl border p-4 transition-colors sm:p-5',
 		pending
 			? 'border-dashed border-stone-300 bg-transparent'
-			: 'border-stone-200 bg-white hover:border-stone-300 hover:bg-stone-100/60',
+			: 'cursor-pointer border-stone-200 bg-white hover:border-stone-300 hover:bg-stone-100/60',
 	]}
 >
 	<span class="mt-0.5 h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-stone-100">
@@ -76,7 +76,10 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 				{pending ? (
 					<span class="font-medium leading-snug text-stone-400">{title}</span>
 				) : (
-					<a href={`/exhibitions/${id}`} class="font-medium leading-snug text-stone-900 hover:underline">
+					<a
+						href={`/exhibitions/${id}`}
+						class="font-medium leading-snug text-stone-900 after:absolute after:inset-0 after:rounded-xl hover:underline"
+					>
 						{title}
 					</a>
 				)}
