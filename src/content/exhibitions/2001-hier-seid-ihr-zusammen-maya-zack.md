@@ -1,5 +1,5 @@
 ---
-title: "מאיה ז״ק - אתכם ארצה לזמן (Hier Seid Ihr Zusammen)"
+title: "אתכם ארצה לזמן (Hier Seid Ihr Zusammen)"
 year: 2001
 language: he
 venue: "גלריה קו 16"
