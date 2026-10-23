@@ -11,6 +11,5 @@ reviews:
     date: "אוקטובר 2003"
     found: false
 pending: true
-pendingNote: "Venue and materials (invitation, catalog, curatorial text, installation photos) to be added. The review still needs to be located."
 draft: false
 ---
