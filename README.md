@@ -1,43 +1,38 @@
-# Astro Starter Kit: Minimal
+# Irit Segoli Archive
 
-```sh
-npm create astro@latest -- --template minimal
-```
+A digital archive of the writing and curatorial work of Irit Segoli: articles, catalog essays, and exhibitions.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**Website:** https://irit-segoli.github.io/
 
-## 🚀 Project Structure
+## Content and rights
 
-Inside of your Astro project, you'll see the following folders and files:
+The website's source code is released under the [MIT License](LICENSE).
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+The archive content is **not** covered by that license:
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- Texts by Irit Segoli are © Irit Segoli. All rights reserved.
+- Artworks, photographs, and scanned publication pages belong to their respective artists, photographers, and publishers, and appear here for archival and research purposes.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+To request a correction or the removal of material, use the form on the website.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Adding material
 
-## 🧞 Commands
+Each article or exhibition is a Markdown file:
 
-All commands are run from the root of the project, from a terminal:
+- `src/content/articles/`
+- `src/content/exhibitions/`
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+The fields each entry accepts are defined in `src/content.config.ts`. PDFs go in `public/files/`, images in `public/images/`. Entries marked `pending: true` appear in the lists without a page of their own, and entries marked `draft: true` are not published.
 
-## 👀 Want to learn more?
+## Development
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Requires Node.js 22.12 or later.
+
+| Command           | Action                                      |
+| :---------------- | :------------------------------------------ |
+| `npm install`     | Install dependencies                        |
+| `npm run dev`     | Start the local dev server at `localhost:4321` |
+| `npm run build`   | Build the site to `./dist/`                 |
+| `npm run preview` | Preview the build locally                   |
+
+Every push to `master` builds the site and publishes it to GitHub Pages (`.github/workflows/deploy.yml`).
