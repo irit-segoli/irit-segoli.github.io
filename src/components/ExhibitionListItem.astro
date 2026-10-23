@@ -64,20 +64,22 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 
 	<div class="min-w-0 flex-1">
 		<div dir={dir} lang={language}>
-			{year && <p class="text-sm font-medium tabular-nums text-stone-700">{year}</p>}
-			{hasPage ? (
-				<a
-					href={`/exhibitions/${id}`}
-					class:list={[
-						'font-medium leading-snug after:absolute after:inset-0 after:rounded-xl hover:underline',
-						pending ? 'text-stone-500' : 'text-stone-900',
-					]}
-				>
-					{title}
-				</a>
-			) : (
-				<span class="font-medium leading-snug text-stone-400">{title}</span>
-			)}
+			<div class="flex items-baseline gap-2">
+				{year && <span class="shrink-0 text-sm font-medium tabular-nums text-stone-700">{year}</span>}
+				{hasPage ? (
+					<a
+						href={`/exhibitions/${id}`}
+						class:list={[
+							'font-medium leading-snug after:absolute after:inset-0 after:rounded-xl hover:underline',
+							pending ? 'text-stone-500' : 'text-stone-900',
+						]}
+					>
+						{title}
+					</a>
+				) : (
+					<span class="font-medium leading-snug text-stone-400">{title}</span>
+				)}
+			</div>
 			{artists.length > 0 && (
 				<p class="mt-0.5 text-sm leading-snug text-stone-700">{artistsLabel}: {artists.join(', ')}</p>
 			)}
