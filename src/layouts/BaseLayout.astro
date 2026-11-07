@@ -10,7 +10,9 @@ interface Props {
 
 const {
 	title,
-	description = 'אירית סגולי (Irit Segoli): art researcher, curator, and justice activist. Archive of her articles, catalog essays, and exhibitions. ארכיון המאמרים והתערוכות של אירית סגולי.',
+	// Starts in English with the Hebrew name embedded mid-sentence: a description that opens in Hebrew
+	// gets rendered right-to-left in Google results, which scrambles the punctuation around it
+	description = 'Irit Segoli (אירית סגולי) is an art researcher, curator, and justice activist. An archive of her articles, catalog essays, and exhibitions.',
 } = Astro.props;
 
 const siteName = 'Irit Segoli | אירית סגולי';
@@ -28,12 +30,26 @@ const personSchema = {
 	jobTitle: ['Art researcher', 'Curator'],
 	url: Astro.site?.href,
 };
+
+// Google takes the site name shown above results from WebSite data on the homepage;
+// without it, a github.io site is labelled "GitHub"
+const isHome = title === 'Home';
+const websiteSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: 'Irit Segoli',
+	alternateName: ['אירית סגולי', 'Irit Segoli Archive'],
+	url: Astro.site?.href,
+};
 ---
 
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+		<link rel="icon" href="/favicon.ico" sizes="48x48" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={description} />
 		<meta name="author" content="Irit Segoli (אירית סגולי)" />
@@ -48,6 +64,7 @@ const personSchema = {
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:locale:alternate" content="he_IL" />
 		<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+		{isHome && <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />}
 		<title>{pageTitle}</title>
 	</head>
 	<body class="flex min-h-screen flex-col bg-stone-50 text-stone-900">
