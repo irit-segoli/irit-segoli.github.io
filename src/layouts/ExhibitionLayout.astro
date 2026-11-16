@@ -13,6 +13,7 @@ interface Props {
 	curators: string[];
 	artists: string[];
 	invitation?: string;
+	invitationBack?: string;
 	catalogPdf?: string;
 	catalogPdfEn?: string;
 	installationImages: string[];
@@ -28,6 +29,7 @@ const {
 	curators,
 	artists,
 	invitation,
+	invitationBack,
 	catalogPdf,
 	catalogPdfEn,
 	installationImages,
@@ -80,6 +82,15 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 
 		{invitation && (
 			<img src={invitation} alt={`Exhibition invitation: ${title}`} class="mt-6 rounded-lg border border-stone-200" />
+		)}
+
+		{invitationBack && (
+			<img
+				src={invitationBack}
+				alt={`Exhibition invitation, back: ${title}`}
+				class="mt-4 rounded-lg border border-stone-200"
+				loading="lazy"
+			/>
 		)}
 
 		<div class="prose prose-stone mt-10 max-w-none">

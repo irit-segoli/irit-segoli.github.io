@@ -50,6 +50,8 @@ const exhibitions = defineCollection({
 			artistsLabel: z.string().optional(),
 			hasCuratorialText: z.boolean().default(false),
 			invitation: z.string().optional(),
+			// Back side of the invitation card, shown below the front on the exhibition page
+			invitationBack: z.string().optional(),
 			catalogPdf: z.string().optional(),
 			catalogPdfEn: z.string().optional(),
 			installationImages: z.array(z.string()).default([]),

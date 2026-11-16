@@ -25,6 +25,7 @@ pnpm-debug.log*
 
 # private staging area for unprocessed uploads
 inbox/
+inbox-bu/
 
 # personal to-do notes, not site content
 src/content/iritsegoli/

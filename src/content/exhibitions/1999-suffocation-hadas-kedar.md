@@ -1,12 +1,13 @@
 ---
 title: "סיפוקיישן (Suffocation)"
-year: 1998
+year: 1999
+date: 1999-05-12
 language: he
-venue: "גלריה קו 16"
+venue: "גלריה קו 16 (12.5.99 - 24.6.99)"
 curators: ["Irit Segoli"]
 artists: ["הדס קידר"]
 artistsLabel: "אמנית"
 description: "תערוכת יחיד."
-pending: true
+invitation: "/images/exhibitions/1999-suffocation-hadas-kedar-invitation.jpg"
 draft: false
 ---
