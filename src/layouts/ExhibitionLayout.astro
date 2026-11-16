@@ -15,6 +15,7 @@ interface Props {
 	invitation?: string;
 	invitationBack?: string;
 	catalogPdf?: string;
+	catalogTitle?: string;
 	catalogPdfEn?: string;
 	installationImages: string[];
 	reviews: Review[];
@@ -31,6 +32,7 @@ const {
 	invitation,
 	invitationBack,
 	catalogPdf,
+	catalogTitle,
 	catalogPdfEn,
 	installationImages,
 	reviews,
@@ -64,7 +66,9 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 						rel="noopener noreferrer"
 						class="inline-block rounded-full bg-stone-900 px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
 					>
-						{catalogPdfEn ? 'Download catalog (Hebrew)' : 'Download catalog'}
+						{catalogTitle ? (
+							<>Download catalog: <bdi>{catalogTitle}</bdi></>
+						) : catalogPdfEn ? 'Download catalog (Hebrew)' : 'Download catalog'}
 					</a>
 				)}
 				{catalogPdfEn && (

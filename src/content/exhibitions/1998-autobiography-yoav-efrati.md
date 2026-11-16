@@ -7,5 +7,7 @@ venue: "גלריה קו 16 (25.3.98 - 30.4.98)"
 curators: ["Irit Segoli"]
 artists: ["יואב אפרתי"]
 invitation: "/images/exhibitions/1998-autobiography-yoav-efrati-invitation.jpg"
+catalogPdf: "/files/exhibitions/1998-autobiography-yoav-efrati-elbow.pdf"
+catalogTitle: "מרפק / Elbow"
 draft: false
 ---

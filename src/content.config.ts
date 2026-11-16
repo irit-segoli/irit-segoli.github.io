@@ -53,6 +53,8 @@ const exhibitions = defineCollection({
 			// Back side of the invitation card, shown below the front on the exhibition page
 			invitationBack: z.string().optional(),
 			catalogPdf: z.string().optional(),
+			// Name shown on the download button, e.g. "Download catalog: מרפק / Elbow"
+			catalogTitle: z.string().optional(),
 			catalogPdfEn: z.string().optional(),
 			installationImages: z.array(z.string()).default([]),
 			reviews: z
