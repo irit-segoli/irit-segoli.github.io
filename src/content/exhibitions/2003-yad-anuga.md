@@ -8,6 +8,7 @@ curators: ["Irit Segoli"]
 artists: ["משה גרשוני"]
 tags: ["משה גרשוני", "אמנות קול"]
 pending: true
+installationImages: ["/images/exhibitions/2003-yad-anuga-installation.jpg"]
 relatedArticles: ["2003-yad-anuga"]
 draft: false
 ---

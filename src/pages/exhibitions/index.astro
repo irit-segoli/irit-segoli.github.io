@@ -26,7 +26,7 @@ const exhibitions = (await getCollection('exhibitions', ({ data }) => !data.draf
 					artistsLabel={exhibition.data.artistsLabel}
 					venue={exhibition.data.venue}
 					description={exhibition.data.description}
-					invitation={exhibition.data.invitation}
+					invitation={exhibition.data.invitation ?? exhibition.data.installationImages[0]}
 					language={exhibition.data.language}
 					pending={exhibition.data.pending}
 					pendingNote={exhibition.data.pendingNote}
