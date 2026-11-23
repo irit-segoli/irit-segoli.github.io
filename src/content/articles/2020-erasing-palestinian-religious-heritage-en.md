@@ -9,6 +9,7 @@ tags: ["maqams", "Palestinian religious heritage", "West Bank", "Machsom Watch"]
 section: justice
 hasFullText: false
 thumbnail: "/images/articles/2020-erasing-palestinian-religious-heritage-en.jpg"
+pdf: "/files/articles/2020-erasing-palestinian-religious-heritage-en.pdf"
 externalUrl: "https://www.972mag.com/palestinian-holy-sites-west-bank/"
 draft: false
 ---

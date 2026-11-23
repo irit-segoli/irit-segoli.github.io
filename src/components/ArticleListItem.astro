@@ -31,9 +31,12 @@ const {
 	quoteNote,
 } = Astro.props;
 
-const href = hasFullText ? `/articles/${id}` : pdf ?? externalUrl ?? `/articles/${id}`;
-const isExternal = !hasFullText && Boolean(pdf ?? externalUrl);
-const linkLabel = hasFullText ? 'Read' : pdf ? 'PDF' : 'External link';
+// The card links to the full text, else the external page, else the PDF.
+// When the card links elsewhere but a PDF exists too, a separate download button is shown.
+const href = hasFullText ? `/articles/${id}` : externalUrl ?? pdf ?? `/articles/${id}`;
+const isExternal = !hasFullText && Boolean(externalUrl ?? pdf);
+const linkLabel = hasFullText ? 'Read' : externalUrl ? 'External link' : pdf ? 'PDF' : 'External link';
+const showPdfButton = !pending && Boolean(pdf) && (hasFullText || Boolean(externalUrl));
 const dir = language === 'en' ? 'ltr' : 'rtl';
 ---
 
@@ -76,7 +79,7 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 							<path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
 							<path d="M8 8h8M8 12h8M8 16h5" />
 						</>
-					) : pdf ? (
+					) : pdf && !externalUrl ? (
 						<>
 							<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
 							<path d="M14 3v5h5" />
@@ -119,5 +122,27 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 		<div class="mt-0.5 text-[11px] uppercase tracking-wide text-stone-400">
 			{pending ? 'Pending' : linkLabel}
 		</div>
+		{showPdfButton && (
+			<a
+				href={pdf}
+				download
+				class="relative z-10 mt-2 inline-flex items-center gap-1 rounded-md border border-stone-300 bg-white px-2 py-1 text-[11px] font-medium uppercase tracking-wide text-stone-600 transition-colors hover:border-stone-900 hover:bg-stone-900 hover:text-white"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="h-3 w-3"
+					aria-hidden="true"
+				>
+					<path d="M12 4v11M7 10l5 5 5-5M5 20h14" />
+				</svg>
+				PDF
+			</a>
+		)}
 	</div>
 </li>
