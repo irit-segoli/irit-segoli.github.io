@@ -11,6 +11,8 @@ interface Props {
 	thumbnail?: string;
 	pending: boolean;
 	pendingNote?: string;
+	quote?: string;
+	quoteNote?: string;
 }
 
 const {
@@ -25,6 +27,8 @@ const {
 	thumbnail,
 	pending,
 	pendingNote,
+	quote,
+	quoteNote,
 } = Astro.props;
 
 const href = hasFullText ? `/articles/${id}` : pdf ?? externalUrl ?? `/articles/${id}`;
@@ -104,6 +108,7 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 			</a>
 		)}
 		{publication && <p class="mt-1 text-sm leading-snug text-stone-500">{publication}</p>}
+		{quote && <blockquote class="mt-2 border-s-2 border-stone-300 ps-3 text-sm italic leading-snug text-stone-600">״{quote}״{quoteNote && <span class="not-italic text-stone-500"> ({quoteNote})</span>}</blockquote>}
 		{pending && pendingNote && (
 			<p class="mt-1 text-sm italic leading-snug text-stone-400" dir="ltr" lang="en">{pendingNote}</p>
 		)}
