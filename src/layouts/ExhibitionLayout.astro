@@ -39,6 +39,11 @@ const {
 	relatedArticles,
 } = Astro.props;
 const dir = language === 'en' ? 'ltr' : 'rtl';
+
+// Items written by others (press coverage, catalogs) vs. Irit's own texts
+const isPress = (a: CollectionEntry<'articles'>) => a.data.section === 'press' || a.data.section === 'related';
+const ownWritings = relatedArticles.filter((a) => !isPress(a));
+const pressArticles = relatedArticles.filter(isPress);
 ---
 
 <BaseLayout title={title}>
@@ -109,40 +114,11 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 			</div>
 		)}
 
-		{reviews.length > 0 && (
+		{ownWritings.length > 0 && (
 			<section class="mt-12 border-t border-stone-200 pt-8">
-				<h2 class="text-lg font-semibold tracking-tight text-stone-900">Reviews</h2>
-				<ul class="mt-4 space-y-4">
-					{reviews.map((review) => {
-						const link = review.pdf ?? review.url;
-						return (
-							<li class="text-sm leading-relaxed">
-								<p class="text-stone-700" dir={dir} lang={language}>
-									{review.author},{' '}
-									{link ? (
-										<a href={link} target="_blank" rel="noopener noreferrer" class="underline hover:text-stone-900">
-											&quot;{review.title}&quot;
-										</a>
-									) : (
-										<>&quot;{review.title}&quot;</>
-									)}
-									, {review.publication}
-									{review.issue && `, ${review.issue}`}
-									{review.date && `, ${review.date}`}
-								</p>
-								{!review.found && <p class="mt-0.5 text-xs italic text-stone-400">Copy not yet located</p>}
-							</li>
-						);
-					})}
-				</ul>
-			</section>
-		)}
-
-		{relatedArticles.length > 0 && (
-			<section class="mt-12 border-t border-stone-200 pt-8">
-				<h2 class="text-lg font-semibold tracking-tight text-stone-900">Related writings</h2>
+				<h2 class="text-lg font-semibold tracking-tight text-stone-900">Writings</h2>
 				<ul class="mt-4 space-y-3">
-					{relatedArticles.map((article) => (
+					{ownWritings.map((article) => (
 						<ArticleListItem
 							id={article.id}
 							title={article.data.title}
@@ -155,9 +131,63 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 							thumbnail={article.data.thumbnail}
 							pending={article.data.pending}
 							pendingNote={article.data.pendingNote}
+							quote={article.data.quote}
+							quoteNote={article.data.quoteNote}
 						/>
 					))}
 				</ul>
+			</section>
+		)}
+
+		{(pressArticles.length > 0 || reviews.length > 0) && (
+			<section class="mt-12 border-t border-stone-200 pt-8">
+				<h2 class="text-lg font-semibold tracking-tight text-stone-900">Press</h2>
+				{pressArticles.length > 0 && (
+					<ul class="mt-4 space-y-3">
+						{pressArticles.map((article) => (
+							<ArticleListItem
+								id={article.id}
+								title={article.data.title}
+								year={article.data.year}
+								publication={article.data.publication}
+								language={article.data.language}
+								hasFullText={article.data.hasFullText}
+								pdf={article.data.pdf}
+								externalUrl={article.data.externalUrl}
+								thumbnail={article.data.thumbnail}
+								pending={article.data.pending}
+								pendingNote={article.data.pendingNote}
+								quote={article.data.quote}
+								quoteNote={article.data.quoteNote}
+							/>
+						))}
+					</ul>
+				)}
+				{reviews.length > 0 && (
+					<ul class="mt-4 space-y-4">
+						{reviews.map((review) => {
+							const link = review.pdf ?? review.url;
+							return (
+								<li class="text-sm leading-relaxed">
+									<p class="text-stone-700" dir={dir} lang={language}>
+										{review.author},{' '}
+										{link ? (
+											<a href={link} target="_blank" rel="noopener noreferrer" class="underline hover:text-stone-900">
+												&quot;{review.title}&quot;
+											</a>
+										) : (
+											<>&quot;{review.title}&quot;</>
+										)}
+										, {review.publication}
+										{review.issue && `, ${review.issue}`}
+										{review.date && `, ${review.date}`}
+									</p>
+									{!review.found && <p class="mt-0.5 text-xs italic text-stone-400">Copy not yet located</p>}
+								</li>
+							);
+						})}
+					</ul>
+				)}
 			</section>
 		)}
 	</article>

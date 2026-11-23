@@ -16,5 +16,6 @@ reviews:
     issue: "גיליון 147"
     date: "אוקטובר 2003"
     found: false
+relatedArticles: ["2014-gam-haprofil-hu-agresia"]
 draft: false
 ---

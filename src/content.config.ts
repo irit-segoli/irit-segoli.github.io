@@ -18,7 +18,8 @@ const articles = defineCollection({
 			quote: z.string().optional(),
 			quoteNote: z.string().optional(),
 			tags: z.array(z.string()).default([]),
-			section: z.enum(['general', 'justice', 'more', 'press']).default('general'),
+			// 'related': not listed on any index page; shown only in an exhibition's Press section
+			section: z.enum(['general', 'justice', 'more', 'press', 'related']).default('general'),
 			hasFullText: z.boolean().default(false),
 			pdf: z.string().optional(),
 			externalUrl: z.url().optional(),
