@@ -107,7 +107,7 @@ const dir = language === 'en' ? 'ltr' : 'rtl';
 				{title}
 			</a>
 		)}
-		{publication && <p class="mt-1 text-sm leading-snug text-stone-500">{publication}</p>}
+		{publication && <p class="mt-1 text-sm leading-snug text-stone-500" dir="auto">{publication}</p>}
 		{quote && <blockquote class="mt-2 border-s-2 border-stone-300 ps-3 text-sm italic leading-snug text-stone-600">״{quote}״{quoteNote && <span class="not-italic text-stone-500"> ({quoteNote})</span>}</blockquote>}
 		{pending && pendingNote && (
 			<p class="mt-1 text-sm italic leading-snug text-stone-400" dir="ltr" lang="en">{pendingNote}</p>

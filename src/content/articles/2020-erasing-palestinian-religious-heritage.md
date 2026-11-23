@@ -2,7 +2,7 @@
 title: "כך מוחקת ישראל את המורשת הדתית הפלסטינית בשטחים"
 year: 2020
 date: 2020-09-03
-publication: "mekomit.co.il"
+publication: "mekomit.co.il, 3.9.2020"
 type: op-ed
 language: he
 tags: ["מקאמים", "מורשת דתית פלסטינית", "השטחים"]
