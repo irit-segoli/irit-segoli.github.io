@@ -9,6 +9,7 @@ coAuthors: []
 tags: ["יצחק דנציגר", "פיסול ישראלי", "היסטוריה של האמנות"]
 hasFullText: false
 thumbnail: "/images/articles/2018-akedat-yitzhak.png"
+pdf: "/files/articles/2018-akedat-yitzhak.pdf"
 externalUrl: "https://www.erev-rav.com/archives/48694"
 abstract: "טיוטת תקציר לבדיקה: מאמר הבוחן מחדש את יחסו הביקורתי של הפסל יצחק דנציגר לאידיאולוגיה הציונית, ומתמודד עם הפרשנות שהציעה שרה חינסקי במאמרה 'שתיקת הדגים' (1993). המאמר משווה בין דנציגר לתלמידו אביטל גבע, ובוחן את ההבחנה בין ייצוג להדגמה כאמצעי אמנותי."
 draft: false
