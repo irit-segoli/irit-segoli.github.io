@@ -1,8 +1,8 @@
 ---
-title: "Painting in a World of Photography"
+title: "What We (Don't) See"
 year: 1994
 date: 1994-10
-publication: "Exhibition catalog, Painters and Sculptors Association, Tel Aviv (Art Focus)"
+publication: 'From the exhibition catalog "Painting in a World of Photography", Painters and Sculptors Association, Tel Aviv (Art Focus)'
 type: catalog-essay
 language: en
 tags: ["painting", "photography", "Art Focus"]
