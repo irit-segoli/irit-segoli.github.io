@@ -35,7 +35,8 @@ const {
 // When the card links elsewhere but a PDF exists too, a separate download button is shown.
 const href = hasFullText ? `/articles/${id}` : externalUrl ?? pdf ?? `/articles/${id}`;
 const isExternal = !hasFullText && Boolean(externalUrl ?? pdf);
-const linkLabel = hasFullText ? 'Read' : externalUrl ? 'External link' : pdf ? 'PDF' : 'External link';
+const isVideo = Boolean(externalUrl && /(youtube\.com|youtu\.be|vimeo\.com)/.test(externalUrl));
+const linkLabel = hasFullText ? 'Read' : isVideo ? 'Video' : externalUrl ? 'External link' : pdf ? 'PDF' : 'External link';
 const showPdfButton = !pending && Boolean(pdf) && (hasFullText || Boolean(externalUrl));
 const dir = language === 'en' ? 'ltr' : 'rtl';
 ---
