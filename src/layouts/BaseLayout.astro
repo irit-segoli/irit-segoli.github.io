@@ -10,9 +10,9 @@ interface Props {
 
 const {
 	title,
-	// Starts in English with the Hebrew name embedded mid-sentence: a description that opens in Hebrew
-	// gets rendered right-to-left in Google results, which scrambles the punctuation around it
-	description = 'Irit Segoli (אירית סגולי) is an art researcher, curator, and justice activist. An archive of her articles, catalog essays, and exhibitions.',
+	// English only: any Hebrew in the snippet makes Google mix text directions and scramble the punctuation.
+	// The Hebrew name is already in the page title.
+	description = 'Irit Segoli is an art curator and researcher of art and of Palestinian heritage sites, and an activist for justice and equality. An archive of her writings, exhibitions, and press.',
 } = Astro.props;
 
 const siteName = 'Irit Segoli | אירית סגולי';
@@ -57,7 +57,7 @@ const websiteSchema = {
 		<link rel="canonical" href={canonical} />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<meta property="og:type" content="website" />
-		<meta property="og:site_name" content={siteName} />
+		<meta property="og:site_name" content="Irit Segoli" />
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
